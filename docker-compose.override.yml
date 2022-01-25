@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    environment:
+      PORT: 8080
+      NODE_ENV: 'development'
+      JWT_SECRET: "otbsds4s5642f5f5II8d9wAAs__ser1574d9d5667NarutoUzumaki"
+      JWT_EXPIRES_IN: '8h'
+      POSTGRES_DB_USER: 'admin'
+      POSTGRES_DB_PASS: 'admin'
+      POSTGRES_DB_NAME: 'example'
+      POSTGRES_DB_HOST: 'postgres'
+      POSTGRES_DB_PORT: 5432
+      EMAIL_HOST: 'smtp.gmail.com'
+      EMAIL_PORT: 465
+      EMAIL_PASS: ''
+      EMAIL_USER: 'example@gmail.com'
+      FACEBOOK_CLIENT_ID: ''
+      FACEBOOK_CLIENT_SECRET: ''
+      GOOGLE_CLIENT_ID: ''
+      GOOGLE_SECRET: ''

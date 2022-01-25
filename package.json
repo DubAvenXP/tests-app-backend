@@ -1,0 +1,57 @@
+{
+  "name": "express-backend-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV='development' nodemon app.js",
+    "prod": "NODE_ENV='production' node app.js",
+    "stag": "NODE_ENV='staging' node app.js",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run:dev": "NODE_ENV='development' sequelize-cli db:migrate",
+    "migrations:run:stag": "NODE_ENV='staging' sequelize-cli db:migrate",
+    "migrations:run": "NODE_ENV='production' sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo --all",
+    "migrations:drop": "sequelize-cli db:drop",
+    "lint": "eslint",
+    "start": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DubAvenXP/express-backend-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DubAvenXP/express-backend-template/issues"
+  },
+  "homepage": "https://github.com/DubAvenXP/express-backend-template#readme",
+  "dependencies": {
+    "@hapi/boom": "^9.1.4",
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "google-auth-library": "^7.10.2",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.4.1",
+    "sequelize-cli": "^6.3.0"
+  }
+}
