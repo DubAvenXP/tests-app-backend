@@ -1,3 +1,6 @@
+Añadir carpeta data en /src/database/postgres/data
+No dar seguimiento a los archivos .env
+
 Instrucciones para ejecutar migraciones:
 
     ## Generar Migraciones
