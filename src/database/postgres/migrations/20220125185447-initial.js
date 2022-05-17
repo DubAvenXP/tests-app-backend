@@ -5,12 +5,12 @@ const {
 } = require('../models');
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
     await queryInterface.createTable(ROLE_TABLE, RoleSchema);
     await queryInterface.createTable(USER_TABLE, UserSchema);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable(USER_TABLE);
     await queryInterface.dropTable(ROLE_TABLE);
   }

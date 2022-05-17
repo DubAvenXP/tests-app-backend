@@ -17,3 +17,7 @@ Instrucciones para ejecutar migraciones:
 
     ## Notas:
         1. El orden de creacion y eleminación de las tablas importa debido a sus relaciones.
+
+
+1. Configurar variables de entorno locales y en docker
+2. Generar una migracion inicial

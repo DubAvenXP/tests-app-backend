@@ -26,6 +26,7 @@ router.post('/', [
     check('phone', 'El numero de teléfono no es válido').isMobilePhone(),
     check('password', 'La contraseña es requerida').notEmpty(),
     check('password', 'La contraseña no es válida').isLength({ min: 8, max: 20 }),
+    check('roleId', 'El id del rol es requirido').notEmpty().isUUID(),
     expressValidatorValidate
 ], add);
 
