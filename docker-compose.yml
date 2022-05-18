@@ -9,20 +9,20 @@ services:
       - .:/usr/src
       - /usr/src/node_modules
     command: npx nodemon index.js
-  pgadmin4:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=root@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=root
+  mysql:
+    image: mysql:8.0
+    restart: always
     ports:
-      - "5050:80"
-  postgres:
-    image: postgres:13
-    ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - ./src/database/postgres/data:/var/lib/postgresql/data
+      - ./src/database/mysql/data:/var/lib/mysql
     environment:
-      POSTGRES_USER: 'admin'
-      POSTGRES_PASSWORD: 'admin'
-      POSTGRES_DB: 'example'
+      - MYSQL_DATABASE=technical_test
+      - MYSQL_PASSWORD=root
+      - MYSQL_USER=dubon
+      - MYSQL_ROOT_PASSWORD=root
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080

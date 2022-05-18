@@ -1,18 +1,17 @@
 const { Model, DataTypes, Sequelize, UUIDV4 } = require('sequelize');
 
-const ROLE_TABLE = 'roles';
-const ROLE_MODEL = 'Role';
+const QUESTION_TABLE = 'questions';
+const QUESTION_MODEL = 'Question';
 
-const RoleSchema = {
+const QuestionSchema = {
     id: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4(),
         primaryKey: true,
     },
-    name: {
+    description: {
         allowNull: false,
         type: DataTypes.STRING,
-        unique: true,
     },
     status: {
         allowNull: false,
@@ -30,29 +29,41 @@ const RoleSchema = {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         field: 'updated_at',
-    }
+    },
+    testId: {
+        field: 'test_id',
+        allowNull: false,
+        type: DataTypes.UUID,
+        references: {
+            model: 'tests',
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+    },
 };
 
-class Role extends Model {
+class Question extends Model {
     static associate(models) {
-        this.hasMany(models.User, {
-            foreignKey: 'roleId',
-            as: 'users',
+        this.belongsTo(models.Test, { as: 'Test' });
+        this.hasMany(models.Answer, {
+            foreignKey: 'questionId',
+            as: 'answers',
         });
     }
 
     static config(sequelize) {
         return {
             sequelize,
-            modelName: ROLE_MODEL,
-            tableName: ROLE_TABLE,
+            modelName: QUESTION_MODEL,
+            tableName: QUESTION_TABLE,
         };
     }
 }
 
 module.exports = {
-    Role,
-    RoleSchema,
-    ROLE_TABLE,
-    ROLE_MODEL,
+    Question,
+    QuestionSchema,
+    QUESTION_TABLE,
+    QUESTION_MODEL,
 };

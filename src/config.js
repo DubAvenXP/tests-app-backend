@@ -7,12 +7,12 @@ console.log('Running on ' + process.env.NODE_ENV + ' mode');
 const config = {
     env: process.env.NODE_ENV,
     port: process.env.PORT,
-    postgres: {
-        user: process.env.POSTGRES_DB_USER,
-        password: process.env.POSTGRES_DB_PASS,
-        host: process.env.POSTGRES_DB_HOST,
-        name: process.env.POSTGRES_DB_NAME,
-        port: process.env.POSTGRES_DB_PORT,
+    mysql: {
+        user: process.env.MYSQL_DB_USER,
+        password: process.env.MYSQL_DB_PASS,
+        host: process.env.MYSQL_DB_HOST,
+        name: process.env.MYSQL_DB_NAME,
+        port: process.env.MYSQL_DB_PORT,
     },
     mongo: {
         user: process.env.MONGO_DB_USER,

@@ -3,7 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const config = require('./config');
 
-const postgresConnection = require('./libs/sequelize');
+const mysqlConnection = require('./libs/sequelize');
 
 class Server {
     constructor() {
@@ -11,9 +11,9 @@ class Server {
         this.port = config.port;
 
         this.paths = {
-            user: '/api/v1/users',
-            role: '/api/v1/roles',
-            auth: '/api/v1/auth',
+            tests: '/api/v1/tests',
+            questions: '/api/v1/questions',
+            answers: '/api/v1/answers',
         };
 
         this.connectDB();
@@ -23,7 +23,7 @@ class Server {
 
     async connectDB() {
         try {
-            postgresConnection.authenticate();
+            mysqlConnection.authenticate();
             console.log('Database connection has been established successfully.');
         } catch (error) {
             console.log('Unable to connect to the database:', error);
@@ -38,9 +38,9 @@ class Server {
     }
 
     routes() {
-        this.app.use(this.paths.user, require('./modules/users/routes/user.router'));
-        this.app.use(this.paths.role, require('./modules/users/routes/role.router'));
-        this.app.use(this.paths.auth, require('./modules/users/routes/auth.router'));
+        this.app.use(this.paths.answers, require('./modules/teachers/routes/answer.router'));
+        this.app.use(this.paths.questions, require('./modules/teachers/routes/question.router'));
+        this.app.use(this.paths.tests, require('./modules/teachers/routes/test.router'));
     }
 
     listen() {

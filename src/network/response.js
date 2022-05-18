@@ -1,12 +1,7 @@
 const success = (req, res, message, status) => {
     let statusCode = status || 200;
-    let statusMessage = message || '';
 
-    return res.status(statusCode).send({
-        error: false,
-        status: statusCode,
-        body: statusMessage,
-    });
+    return res.status(statusCode).send(message);
 };
 const err = (req, res, error, status) => {
     let statusCode = status || 500;

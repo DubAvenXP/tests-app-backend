@@ -1,18 +1,18 @@
 const { Sequelize } = require('sequelize');
 
 // const { config } = require('../config');
-const { postgres, env } = require('../config');
-const setupModels = require('../database/postgres/models/setupModels');
+const { mysql, env } = require('../config');
+const setupModels = require('../database/mysql/models/setupModels');
 
-const user = encodeURIComponent(postgres.user);
-const password = encodeURIComponent(postgres.password);
-const URI = `postgres://${user}:${password}@${postgres.host}:${postgres.port}/${postgres.name}`;
+const user = encodeURIComponent(mysql.user);
+const password = encodeURIComponent(mysql.password);
+const URI = `mysql://${user}:${password}@${mysql.host}:${mysql.port}/${mysql.name}`;
 
 let sequelize;
 
 if (env !== 'development') {
   sequelize = new Sequelize(URI, {
-    dialect: 'postgres',
+    dialect: 'mysql',
     logging: false,
     ssl: true,
     dialectOptions: {
@@ -21,12 +21,10 @@ if (env !== 'development') {
         rejectUnauthorized: false
       }
     },
-    timezone: '-6:00'
   });
 } else {
   sequelize = new Sequelize(URI, {
-    dialect: 'postgres',
-    timezone: '-6:00'
+    dialect: 'mysql',
   });
 }
 

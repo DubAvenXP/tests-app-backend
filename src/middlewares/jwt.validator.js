@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 
-const { User } = require('../database/postgres/models');
+const { User } = require('../database/mysql/models');
 
 const validateJWT = async (req = request, res = response, next) => {
     const token = req.header('token');
