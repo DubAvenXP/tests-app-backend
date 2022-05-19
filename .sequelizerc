@@ -1,6 +1,6 @@
 module.exports = {
-    'models-path': './src/database/postgres/models/',
-    'config': './src/database/postgres/config.js',
-    'migrations-path': './src/database/postgres/migrations/',
-    'seeders-path': './src/database/postgres/seeders/',
+    'models-path': './src/database/mysql/models/',
+    'config': './src/database/mysql/config.js',
+    'migrations-path': './src/database/mysql/migrations/',
+    'seeders-path': './src/database/mysql/seeders/',
 }

@@ -1,6 +1,6 @@
 const { response, request } = require('express');
 
-const { Question } = require('../../../database/mysql/models');
+const { Question, Answer } = require('../../../database/mysql/models');
 const { success, err } = require('../../../network/response');
 
 const list = async (req = request, res = response) => {
@@ -40,12 +40,34 @@ const listOne = async (req = request, res = response) => {
 
 const add = async (req = request, res = response) => {
     try {
-        const body = req.body;
+        let { questions } = req.body;
 
-        const question = new Question(body);
+        for (let i = 0; i < questions.length; i++) {
+            const { answers, ...payload } = questions[i];
+            let question = await new Question(payload).save();
 
-        await question.save();
-        success(req, res, question, 201);
+            for (let j = 0; j < answers.length; j++) {
+                await new Answer({
+                    questionId: question.id,
+                    ...answers[j],
+                }).save();
+            }
+        }
+
+        questions = await Question.findAll({
+            where: { testId: questions[0].testId },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'status'],
+            },
+            include: [{
+                association: 'answers',
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'status', 'questionId'],
+                },
+            }],
+        });
+
+        success(req, res, questions, 201);
     } catch (error) {
         console.error(error);
         err(req, res, error, 'Error');
@@ -75,8 +97,8 @@ const remove = async (req = request, res = response) => {
     try {
         const { id } = req.params;
 
-        await Question.destroy({ where: { id } });
-        success(req, res, 'deleted successfully', 200);
+        await Question.update({ status: false }, { where: { id } });
+        success(req, res, { msg: 'deleted successfully' }, 200);
 
     } catch (error) {
         console.error(error);

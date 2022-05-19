@@ -5,7 +5,7 @@ const QUESTION_MODEL = 'Question';
 
 const QuestionSchema = {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.CHAR(36),
         defaultValue: UUIDV4(),
         primaryKey: true,
     },
@@ -33,19 +33,18 @@ const QuestionSchema = {
     testId: {
         field: 'test_id',
         allowNull: false,
-        type: DataTypes.UUID,
+        type: DataTypes.CHAR(36),
         references: {
             model: 'tests',
             key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
     },
 };
 
 class Question extends Model {
     static associate(models) {
-        this.belongsTo(models.Test, { as: 'Test' });
+        this.belongsTo(models.Test, { as: 'test' });
         this.hasMany(models.Answer, {
             foreignKey: 'questionId',
             as: 'answers',

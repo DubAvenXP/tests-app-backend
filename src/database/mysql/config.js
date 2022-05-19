@@ -1,17 +1,17 @@
 const config = require('../../config');
 
-const user = encodeURIComponent(config.postgres.user);
-const password = encodeURIComponent(config.postgres.password);
-const URI = `postgres://${user}:${password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`;
-
+const user = encodeURIComponent(config.mysql.user);
+const password = encodeURIComponent(config.mysql.password);
+const URI = `mysql://${user}:${password}@${config.mysql.host}:${config.mysql.port}/${config.mysql.name}`;
+console.log(URI);
 module.exports = {
     development: {
         url: URI,
-        dialect: 'postgres',
+        dialect: 'mysql',
     },
     staging: {
         url: URI,
-        dialect: 'postgres',
+        dialect: 'mysql',
         ssl: true,
         dialectOptions: {
             ssl: {
@@ -22,7 +22,7 @@ module.exports = {
     },
     production: {
         url: URI,
-        dialect: 'postgres',
+        dialect: 'mysql',
         ssl: true,
         dialectOptions: {
             ssl: {

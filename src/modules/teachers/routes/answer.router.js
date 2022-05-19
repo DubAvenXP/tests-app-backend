@@ -15,6 +15,8 @@ router.get('/:id', [
 
 router.post('/', [
     check('description', 'El nombre es requerido').notEmpty(),
+    check('isCorrect', 'El estado es requerido').notEmpty(),
+    check('questionId', 'El id de la pregunta es requerido es requerido').notEmpty().isUUID(),
     expressValidatorValidate
 ], add);
 

@@ -14,7 +14,12 @@ router.get('/:id', [
 ], listOne);
 
 router.post('/', [
-    check('description', 'El nombre es requerido').notEmpty(),
+    check('questions').notEmpty().isArray(),
+    check('questions.*.description').notEmpty(),
+    check('questions.*.testId').notEmpty().isUUID(),
+    check('questions.*.answers').notEmpty().isArray(),
+    check('questions.*.answers.*.description').notEmpty(),
+    check('questions.*.answers.*.isCorrect').notEmpty().isBoolean(),
     expressValidatorValidate
 ], add);
 

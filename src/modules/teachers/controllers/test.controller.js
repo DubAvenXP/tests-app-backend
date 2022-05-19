@@ -12,8 +12,9 @@ const list = async (req = request, res = response) => {
             where: filter,
             limit,
             offset,
+            order: [['createdAt', 'DESC']],
             attributes: {
-                exclude: ['created_at', 'updated_at', 'status'],
+                exclude: ['updatedAt', 'status'],
             },
         });
 
@@ -25,11 +26,31 @@ const list = async (req = request, res = response) => {
 
 const listOne = async (req = request, res = response) => {
     try {
-        const { id } = req.params;
-        const test = await Test.findByPk(id, {
+        const { url } = req.params;
+        const test = await Test.findOne({
+            where: { url },
+            include: [
+                {
+                    association: 'questions',
+                    order: [['createdAt', 'DSC',]],
+                    where: { status: true },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'testId', 'status'],
+                    },
+                    include: [
+                        {
+                            association: 'answers',
+                            attributes: {
+                                exclude: ['createdAt', 'updatedAt', 'questionId', 'status'],
+                            },
+                        }
+                    ]
+
+                }
+            ],
             attributes: {
-                exclude: ['created_at', 'updated_at', 'status'],
-            },
+                exclude: ['updatedAt', 'status'],
+            }
         });
         success(req, res, test, 200);
     } catch (error) {

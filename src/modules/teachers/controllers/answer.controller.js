@@ -13,7 +13,7 @@ const list = async (req = request, res = response) => {
             limit,
             offset,
             attributes: {
-                exclude: ['created_at', 'updated_at', 'status'],
+                exclude: ['createdAt', 'updatedAt', 'status'],
             },
         });
         
@@ -28,7 +28,7 @@ const listOne = async (req = request, res = response) => {
         const { id } = req.params;
         const answer = await Answer.findByPk(id, {
             attributes: {
-                exclude: ['created_at', 'updated_at', 'status'],
+                exclude: ['createdAt', 'updatedAt', 'status'],
             },
         });
         success(req, res, answer, 200);

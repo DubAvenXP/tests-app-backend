@@ -4,7 +4,7 @@ const ANSWER_MODEL = 'Answer';
 
 const AnswerSchema = {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.CHAR(36),
         defaultValue: UUIDV4(),
         primaryKey: true,
     },
@@ -36,13 +36,12 @@ const AnswerSchema = {
     questionId: {
         field: 'question_id',
         allowNull: false,
-        type: DataTypes.UUID,
+        type: DataTypes.CHAR(36),
         references: {
             model: 'questions',
             key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
     },
 };
 

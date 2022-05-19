@@ -4,7 +4,7 @@ const TEST_MODEL = 'Test';
 
 const TestSchema = {
     id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.CHAR(36),
         defaultValue: UUIDV4(),
         primaryKey: true,
     },
