@@ -139,6 +139,6 @@ src/database/mongo/data
 # dotenv environment variables file
 # .env
 # .env.test
-# .env.production
-# .env.development
-# .env.staging
+.env.production
+.env.development
+.env.staging
